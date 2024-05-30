@@ -1,6 +1,7 @@
 from pyqgis_scripting_ext.core import *
 
-folder = "/Users/amelonelie/Documents/Master EMMA/semester 2/advanced geomatics+EIA/advanced geomatics/03/"
+folder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/data/"
+output_folder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/outputs/"
 path = f"{folder}stations.txt"
 HMap.remove_layers_by_name(["Stations"])
 
@@ -56,8 +57,8 @@ for line in station_lines:
     station_layer.add_feature(point,[statid, statname, statcn, latitude, longitude, statheight])
 
 
-path = folder + "stations.gpkg"
-error = station_layer.dump_to_gpkg(path, overwrite=True)
+output_path = output_folder + "stations.gpkg"
+error = station_layer.dump_to_gpkg(output_path, overwrite=True)
 if(error):
     print(error)
     
