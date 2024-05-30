@@ -24,6 +24,6 @@ def fileSummary(path, idFieldName, avgFieldName):
     print("Fields:")
     for field in fields:
         print(f"->{field.strip()}")
-fileSummary("/Users/amelonelie/Documents/Master EMMA/semester 2/advanced geomatics+EIA/advanced geomatics/01/stations.txt", "STATID", "RR")
+fileSummary("/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/data/stations.txt", "STATID", "RR")
 print("********************")
-fileSummary("/Users/amelonelie/Documents/Master EMMA/semester 2/advanced geomatics+EIA/advanced geomatics/01/station_data.txt", "CN", "HEIGHT")
+fileSummary("/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/data/station_data.txt", "CN", "HEIGHT")
