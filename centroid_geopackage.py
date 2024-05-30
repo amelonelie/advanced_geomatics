@@ -17,6 +17,7 @@ nameIndex = countriesLayer.field_index("NAME")
 centroids_dict = {
     "name": "String"
 }
+
 centroid_layer = HVectorLayer.new("Centroids", "Point", "EPSG:4326", centroids_dict)
 for feature in countriesFeatures:
     name = feature.attributes[nameIndex]
