@@ -1,5 +1,4 @@
-folder = "/Users/amelonelie/Documents/Master EMMA/semester 2/advanced geomatics+EIA/advanced geomatics/01/"
-
+folder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/data/"
 
 # exercise 1
 
@@ -13,9 +12,9 @@ print(f"Hei, I am {name}\nI am {age} and I love to go {activity}\nI work as an {
 
 # exercise 2
 import pandas as pd
-csv_path = f"{folder}01_exe2_data.csv"
+path = f"{folder}01_exe2_data.csv"
 
-with open(csv_path, 'r') as file:
+with open(path, 'r') as file:
     lines =file.readlines()
     
     
