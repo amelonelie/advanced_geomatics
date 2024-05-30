@@ -2,9 +2,7 @@ from pyqgis_scripting_ext.core import *
 
 folder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/data/"
 path = f"{folder}dpc-covid19-ita-regioni.csv"
-
-folder2 = "/Users/amelonelie/Documents/Master EMMA/semester 2/advanced geomatics+EIA/advanced geomatics/06/natural_earth_vector.gpkg/packages/"
-geopackagePath = folder2 + "natural_earth_vector.gpkg"
+geopackagePath = folder + "small_natural_earth.gpkg"
 
 regionsName = "ne_10m_admin_1_states_provinces"
 regionsLayer = HVectorLayer.open(geopackagePath, regionsName)

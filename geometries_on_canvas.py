@@ -1,7 +1,8 @@
 from pyqgis_scripting_ext.core import *
 
-csv_path = "/Users/amelonelie/Documents/Master EMMA/semester 2/advanced geomatics+EIA/advanced geomatics/03/03_exe0_geometries.csv"
-with open(csv_path, 'r') as file:
+folder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/data/"
+path = f"{folder}03_exe0_geometries.csv"
+with open(path, 'r') as file:
     lines =file.readlines()
 
 mypoints = []
