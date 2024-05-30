@@ -1,4 +1,6 @@
 from pyqgis_scripting_ext.core import *
+folder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/data/"
+geopackagePath = folder + "small_natural_earth.gpkg"
 
 
 HMap.remove_layers_by_name(["Centroids"])
@@ -6,8 +8,7 @@ HMap.remove_layers_by_name(["Centroids"])
 citiesName = "ne_50m_populated_places"
 countriesName = "ne_50m_admin_0_countries"
 
-folder = "/Users/amelonelie/Documents/Master EMMA/semester 2/advanced geomatics+EIA/advanced geomatics/06/natural_earth_vector.gpkg/packages/"
-geopackagePath = folder + "natural_earth_vector.gpkg"
+
 
 countriesLayer = HVectorLayer.open(geopackagePath, countriesName)
 countriesFeatures = countriesLayer.features()
