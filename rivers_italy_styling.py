@@ -1,8 +1,10 @@
 from pyqgis_scripting_ext.core import *
 
-folder = "/Users/amelonelie/Documents/Master EMMA/semester 2/advanced geomatics+EIA/advanced geomatics/06/natural_earth_vector.gpkg/packages/"
+folder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/data/"
+output_folder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/outputs/"
+geopackagePath = folder + "small_natural_earth.gpkg"
 
-geopackagePath = folder + "natural_earth_vector.gpkg"
+
 countriesName = "ne_50m_admin_0_countries"
 citiesName = "ne_50m_populated_places"
 riversName = "ne_10m_rivers_lake_centerlines_scale_rank"
@@ -41,8 +43,6 @@ countriesLayer = HVectorLayer.open(geopackagePath, countriesName)
 countriesLayer.subset_filter("NAME='Italy'")
 italyGeometry = countriesLayer.features()[0].geometry
 
-
-print(italyGeometry.centroid())
 
 polygonStyle = HFill("0,255,0,128") + HStroke("green", 2)
 countriesLayer.set_style(polygonStyle)
@@ -140,8 +140,8 @@ scalebarProperties = {
 printer.add_scalebar(**scalebarProperties)
 
 
-outputPdf = "/Users/amelonelie/Documents/Master EMMA/semester 2/advanced geomatics+EIA/advanced geomatics/08/test.pdf"
-printer.dump_to_pdf(outputPdf)
+output_path = output_folder + "rivers_styling.pdf"
+printer.dump_to_pdf(output_path)
 
-outputPng = "/Users/amelonelie/Documents/Master EMMA/semester 2/advanced geomatics+EIA/advanced geomatics/08/test.png"
-printer.dump_to_pdf(outputPng)
+output_path_png = output_folder + "rivers_styling.png"
+printer.dump_to_pdf(output_path_png)
