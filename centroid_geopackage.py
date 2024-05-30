@@ -1,5 +1,6 @@
 from pyqgis_scripting_ext.core import *
 folder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/data/"
+output_folder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/outputs/"
 geopackagePath = folder + "small_natural_earth.gpkg"
 
 
@@ -30,7 +31,7 @@ HMap.add_layer(centroid_layer)
 
 
     
-path = folder + "centroids.gpkg"
-error = centroid_layer.dump_to_gpkg(path, overwrite=True)
+output_path = output_folder + "centroids.gpkg"
+error = centroid_layer.dump_to_gpkg(output_path, overwrite=True)
 if(error):
     print(error)            
