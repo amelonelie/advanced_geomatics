@@ -1,6 +1,6 @@
 from pyqgis_scripting_ext.core import *
 
-folder = "/Users/amelonelie/Documents/Master EMMA/semester 2/advanced geomatics+EIA/advanced geomatics/03/"
+folder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/data/"
 path = f"{folder}stations.txt"
 
 with open(path, 'r') as file:
