@@ -1,5 +1,6 @@
 #averaging meteo data
-path = "/Users/amelonelie/Documents/Master EMMA/semester 2/advanced geomatics+EIA/advanced geomatics/02/data/rain_data_1year.txt"
+folder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/data/"
+path = f"{folder}rain_data_1year.txt"
 
 with open(path, 'r') as file:
     lines =file.readlines()
