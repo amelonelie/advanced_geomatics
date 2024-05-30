@@ -25,7 +25,7 @@ population_dict = {
 ranges = [
     [0, 1000000],
     [1000001, 80000000],
-    [80000001, 100000000000],
+    [80000001, float('inf')],
 ]
 styles = [
     HFill("green"),
