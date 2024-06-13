@@ -6,7 +6,7 @@ geopackagePath = folder + "small_natural_earth.gpkg"
 
 regionsName = "ne_10m_admin_1_states_provinces"
 regionsLayer = HVectorLayer.open(geopackagePath, regionsName)
-
+outputFolder = "/Users/amelonelie/Documents/Programme/GitHub/advanced_geomatics/outputs/covid_images"
 
 regionsFeatures = regionsLayer.features()
 nameIndex = regionsLayer.field_index("NAME")
