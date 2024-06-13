@@ -44,7 +44,7 @@ day2featuresMap = {}
 for index, line in enumerate(lines):
     line = line.strip()
     
-    if index < 500:
+    if index < 50000:
         lineSplit = line.split(",")
         # 0 -> date
         # 3 -> region
@@ -59,7 +59,6 @@ for index, line in enumerate(lines):
             lat = float(lineSplit[4])
             lon = float(lineSplit[5])
             dataPoint = HPoint(lon, lat)
-            print(day)
             
             for regionname, regionGeometry in regionName2GeometryMap.items():
                 if regionGeometry.intersects(dataPoint):
@@ -70,43 +69,68 @@ for index, line in enumerate(lines):
                         featuresList = [(regionGeometry, [day, region, totalCases])]
                         
                     day2featuresMap[day] = featuresList
-                    
-                    
-                    
-HMap.add_layer(provincesLayer)
 
 
-# regionsFeatures = regionsLayer.features()
-# nameIndex = regionsLayer.field_index("NAME")
-# fieldNames = regionsLayer.field_names
+imagePathsList = []
 
-
-# with open(path, 'r') as file:
-#     covid_lines =file.readlines()
-    
-
-# regions_dict = {
-#     "id": "Integer"
-# }
-
-# points = []
-# for line in covid_lines[1:5]:
-#     line = line.strip()   
-#     line = line.split(",")
-#     x_coord = float(line[4])
-#     y_coord = float(line[5])
-#     point = HPoint(x_coord, y_coord)
-
-# region_layer = HVectorLayer.new("Regions", "Polygon", "EPSG:4326", regions_dict)    
-  
-# for feature in regionsFeatures:
-#     geom = feature.geometry 
-#     if geom.contains(point):
-#         result = geom
+for day, featuresList in day2featuresMap.items():
+  #  if day != "2020-04-01":
+   #     continue
         
-# region_layer.add_feature(result,[1])  
-# HMap.add_layer(region_layer)
-
-
-# # dict key name of the region in csv file, value compele region (geometry)
-# #together
+    print("Generating day", day)   
+    newLayerName = "covid_italy" 
+    HMap.remove_layers_by_name([newLayerName])  
+  
+    schema = {
+        "day":"string", 
+        "region":"string",
+        "totalCases": "Int"
+    }
+    
+    covidLayer = HVectorLayer.new(newLayerName, "MultiPolygon", "EPSG:4326", schema)
+           
+    for geometry, attributes in featuresList:
+        covidLayer.add_feature(geometry, attributes)
+    
+    # style = HFill('yellow') + HStroke('black', 0.5)
+    # covidLayer.set_style(style)
+    
+    ranges = [
+    [float('-inf'), 1000], 
+    [1001, 3000], 
+    [3001, 10000], 
+    [10001, 40000], 
+    [40001, 100000], 
+    [1000001, float('inf')]
+    ]
+    #set styles according to cases
+    styles = [
+    HFill('blue') + HStroke('white', 0.5),
+    HFill('green') + HStroke('white', 0.5),
+    HFill('yellow') + HStroke('white', 0.5),
+    HFill('orange') + HStroke('white', 0.5),
+    HFill('red') + HStroke('white', 0.5),
+    HFill('black') + HStroke('white', 0.5),
+    ]
+    
+    labelStyle = HLabel('totalCases', size = 8, color = 'black') + HHalo() + HFill()
+    covidLayer.set_graduated_style("totalCases", ranges, styles, labelStyle)
+    HMap.add_layer(covidLayer)
+  
+    printer = HPrinter(iface)
+    mapProperties = {
+    "x": 5, 
+    "y":25, 
+    "width":285, 
+    "height":180,
+    "frame":True, 
+    "extent": provincesLayer.bbox()
+    }
+    printer.add_map(**mapProperties)
+    
+    imageName = f"{day}_covid.png"
+    imagePath = f"{outputFolder}/{imageName}"
+    printer.dump_to_image(imagePath)
+    imagePathsList.append(imagePath)
+  
+#HMap.add_layer(provincesLayer)
