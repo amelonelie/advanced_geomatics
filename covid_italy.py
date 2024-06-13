@@ -105,12 +105,12 @@ for day, featuresList in day2featuresMap.items():
     ]
     #set styles according to cases
     styles = [
-    HFill('blue') + HStroke('white', 0.5),
-    HFill('green') + HStroke('white', 0.5),
-    HFill('yellow') + HStroke('white', 0.5),
-    HFill('orange') + HStroke('white', 0.5),
+    HFill('papayawhip') + HStroke('white', 0.5),
+    HFill('lightsalmon') + HStroke('white', 0.5),
+    HFill('tomato') + HStroke('white', 0.5),
     HFill('red') + HStroke('white', 0.5),
-    HFill('black') + HStroke('white', 0.5),
+    HFill('firebrick') + HStroke('white', 0.5),
+    HFill('maroon') + HStroke('white', 0.5),
     ]
     
     labelStyle = HLabel('totalCases', size = 8, color = 'black') + HHalo() + HFill()
@@ -128,6 +128,34 @@ for day, featuresList in day2featuresMap.items():
     }
     printer.add_map(**mapProperties)
     
+    legendProperties = {
+    "x":210, 
+    "y":30, 
+    "width":150, 
+    "frame": True
+    }
+    
+    printer.add_legend(**legendProperties)
+    
+    labelProperties = {
+    "x":120, 
+    "y":10, 
+    "text": "Covid Cases in Italy", 
+    "bold": True
+    }
+    
+    printer.add_label(**labelProperties)
+    
+    labelProperties = {
+    "x":30, 
+    "y":190, 
+    "text": day, 
+    "font_size":28, 
+    "bold":True
+    }
+    
+    printer.add_label(**labelProperties)
+        
     imageName = f"{day}_covid.png"
     imagePath = f"{outputFolder}/{imageName}"
     printer.dump_to_image(imagePath)
