@@ -33,6 +33,30 @@ for provinceFeature in provincesLayer.features():
 for name, geom in regionName2GeometryMap.items():
     print(name)
 
+with open(path, 'r') as file:
+    lines = file.readlines()
+    
+for index, line in enumerate(lines):
+    line = line.strip()
+    
+    if index < 500:
+        lineSplit = line.split(",")
+        # 0 -> date
+        # 3 -> region
+        # 17 -> total cases
+        dayAndTime = lineSplit[0]
+        dayAndTime = dayAndTime.split("T")
+        day = dayAndTime[0]
+        
+        if day.endswith("01"):
+            region = lineSplit[3]
+            totalCases = int(lineSplit[17])
+            lat = float(lineSplit[4])
+            lon = float(lineSplit[5])
+            dataPoint = HPoint(lon, lat)
+            print(day)
+
+
 
 HMap.add_layer(provincesLayer)
 
