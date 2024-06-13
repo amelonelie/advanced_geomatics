@@ -62,14 +62,17 @@ for index, line in enumerate(lines):
             print(day)
             
             for regionname, regionGeometry in regionName2GeometryMap.items():
-                if regionGeomtry.intersects(dataPoint):
+                if regionGeometry.intersects(dataPoint):
                     featuresList = day2featuresMap.get(day)
                     if featuresList:
-                        pass
+                        featuresList.append((regionGeometry, [day, region, totalCases]))
                     else:
-                        featuresList = [(regionGeometry, [day, region, toalCases])]
-
-
+                        featuresList = [(regionGeometry, [day, region, totalCases])]
+                        
+                    day2featuresMap[day] = featuresList
+                    
+                    
+                    
 HMap.add_layer(provincesLayer)
 
 
