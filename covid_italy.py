@@ -77,7 +77,7 @@ for day, featuresList in day2featuresMap.items():
   #  if day != "2020-04-01":
    #     continue
         
-    print("Generating day", day)   
+    #print("Generating day", day)   
     newLayerName = "covid_italy" 
     HMap.remove_layers_by_name([newLayerName])  
   
@@ -100,7 +100,7 @@ for day, featuresList in day2featuresMap.items():
     [1001, 3000], 
     [3001, 10000], 
     [10001, 40000], 
-    [40001, 100000], 
+    [40001, 1000000], 
     [1000001, float('inf')]
     ]
     #set styles according to cases
@@ -133,4 +133,19 @@ for day, featuresList in day2featuresMap.items():
     printer.dump_to_image(imagePath)
     imagePathsList.append(imagePath)
   
-#HMap.add_layer(provincesLayer)
+  
+from PIL import Image
+
+imagesList = []
+for path in imagePathsList:
+    img = Image.open(path)
+    imagesList.append(img)
+animationPath = f"{outputFolder}/covid_animation.gif"
+
+
+imagesList[0].save(animationPath, save_all = True, append_images=imagesList[1:], duration = 500)
+
+for path in imagePathsList:
+    os.remove(path)
+
+
