@@ -17,6 +17,7 @@ provincesLayer.subset_filter("iso_a2='IT'")
 
 # create a dictionary containing the region name and its geometry
 regionName2GeometryMap = {}
+
 regionIndex = provincesLayer.field_index("region")
 
 for provinceFeature in provincesLayer.features():
@@ -36,6 +37,10 @@ for name, geom in regionName2GeometryMap.items():
 with open(path, 'r') as file:
     lines = file.readlines()
     
+    
+day2featuresMap = {}
+
+ 
 for index, line in enumerate(lines):
     line = line.strip()
     
@@ -55,7 +60,14 @@ for index, line in enumerate(lines):
             lon = float(lineSplit[5])
             dataPoint = HPoint(lon, lat)
             print(day)
-
+            
+            for regionname, regionGeometry in regionName2GeometryMap.items():
+                if regionGeomtry.intersects(dataPoint):
+                    featuresList = day2featuresMap.get(day)
+                    if featuresList:
+                        pass
+                    else:
+                        featuresList = [(regionGeometry, [day, region, toalCases])]
 
 
 HMap.add_layer(provincesLayer)
